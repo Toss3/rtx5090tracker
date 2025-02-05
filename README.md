@@ -97,6 +97,37 @@ This project is a Python-based web scraper that monitors the availability of the
 -   **Blocking:** If the script detects potential blocking, it will send an email notification. You may need to manually check the product page and update the `blocking_text` in `config.ini` if necessary.
 -   **Email Issues:** Ensure that your Gmail address and app password are correct in `config.ini`. Also, check your spam folder if you are not receiving notifications.
 
+## Testing the Email Functionality
+
+To ensure that the email notification system is working correctly, you can perform a simple test:
+
+1. **Modify `config.ini`:**
+    -   Open the `config.ini` file in a text editor.
+    -   Change the `blocking_text` under the `[PRODUCT]` section to a random string that you are certain does not exist on the webpage. For example:
+
+        ```ini
+        blocking_text = asdfghjklqwertyuiop
+        ```
+
+2. **Run the script:**
+
+    ```bash
+    python rtx5090fe_tracker.py
+    ```
+
+3. **Check for email:**
+    -   The script should now send an email to the address specified in `config.ini` with the subject "Possible Blocking Detected."
+    -   Check your inbox (and spam folder) for the email.
+
+4. **Revert `config.ini`:**
+    -   **Important:** After testing, change the `blocking_text` back to its original value:
+
+        ```ini
+        blocking_text = NVIDIA GeForce RTX 5090
+        ```
+
+This test helps verify that the script can successfully send emails and that your email settings are configured correctly.
+
 ## Notes
 
 -   The script has been running for five days without detecting blocking in the provided test case. However, websites may change their structure or implement anti-bot measures, which could affect the script's functionality.
