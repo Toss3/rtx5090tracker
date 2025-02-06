@@ -38,6 +38,13 @@ class Config:
         self.config: configparser.ConfigParser = configparser.ConfigParser()
         self.config.read(self.config_file)
 
+        if "PRODUCT" not in self.config:
+            self.config.add_section("PRODUCT")
+            self.config.set("PRODUCT", "out_of_stock_text", "finns ej i lager") # default value if not in config
+
+        with open(self.config_file, 'w') as configfile: # save if new section/value added
+            self.config.write(configfile)
+
     @property
     def email_user(self) -> str:
         """Gets the email username from the configuration.
@@ -72,7 +79,7 @@ class Config:
         Returns:
             str: The URL to track.
         """
-        return self.config["PRODUCT"]["url"]
+        return self.config.get("PRODUCT", "url", raw=True) # Use config.get with raw=True
 
     @property
     def selector(self) -> str:
@@ -100,6 +107,15 @@ class Config:
             str: The text to check for blocking.
         """
         return self.config["PRODUCT"]["blocking_text"]
+
+    @property
+    def out_of_stock_text(self) -> str:
+        """Gets the text indicating "out of stock" from the configuration in lowercase.
+
+        Returns:
+            str: The text indicating "out of stock" in lowercase.
+        """
+        return self.config["PRODUCT"]["out_of_stock_text"].lower()
 
 class WebPage:
     """Handles webpage rendering and element interaction using Selenium."""
@@ -289,7 +305,7 @@ class ProductChecker:
             else:
                 logger.info("Button not found.")
 
-            if button_text and button_text != "finns ej i lager":
+            if button_text and button_text != self.config.out_of_stock_text:
                 # Debugging
                 logger.info("Product is in stock!")
                 self.email_notifier.connect()
