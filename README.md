@@ -58,8 +58,7 @@ This project is a Python-based web scraper that monitors the availability of the
     -   Go to your Google Account settings.
     -   Navigate to "Security" and then "2-Step Verification."
     -   At the bottom of the page, select "App passwords."
-    -   Choose "Mail" as the app and "Other (Custom name)" as the device.
-    -   Give it a name (e.g., "RTX 5090 Tracker") and click "Generate."
+    -   Give your app password a name (e.g., "RTX 5090 Tracker") and click "Generate."
     -   Copy the generated 16-character app password.
 
 2. **Configure `config.ini`:**
