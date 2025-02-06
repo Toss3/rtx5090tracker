@@ -21,8 +21,8 @@ This project is a Python-based web scraper that monitors the availability of the
 1. **Clone the repository:**
 
     ```bash
-    git clone <repository_url>
-    cd <repository_name>
+    git clone https://github.com/Toss3/rtx5090tracker
+    cd rtx5090tracker
     ```
 
 2. **Create a virtual environment (recommended):**
